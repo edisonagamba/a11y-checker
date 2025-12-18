@@ -166,6 +166,7 @@
         cursor: pointer;
         font-weight: 600;
         margin-top: 12px;
+        margin-bottom: 30px;
       }
 
       button.secondary {
@@ -231,7 +232,7 @@
     </div>
 
     <button id="analyze">🔄 Re-analyze</button>
-    <button id="close" class="secondary">Close</button>
+    <!-- <button id="close" class="secondary">Close</button> -->
 
     <script>
       const content = document.getElementById("content");
@@ -240,8 +241,8 @@
       document.getElementById("analyze").onclick = () =>
         parent.postMessage({ pluginMessage: { type: "analyze" } }, "*");
 
-      document.getElementById("close").onclick = () =>
-        parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+      // document.getElementById("close").onclick = () =>
+      //   parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
 
       window.onmessage = (event) => {
         const msg = event.data.pluginMessage;

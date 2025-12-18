@@ -181,3 +181,6 @@ function analyzeSelection() {
 }
 
 analyzeSelection();
+
+
+figma.on("selectionchange", analyzeSelection);
