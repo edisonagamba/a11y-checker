@@ -177,7 +177,12 @@ function analyzeSelection() {
     })
     .filter(Boolean);
 
-  figma.ui.postMessage({ type: 'analysis-complete', data: results, totalSelected: selection.length });
+    figma.ui.onmessage = (msg) => {
+  if (msg.type === 'analyze') {
+    analyzeSelection();
+  }
+};
+   figma.ui.postMessage({ type: 'analysis-complete', data: results, totalSelected: selection.length });
 }
 
 analyzeSelection();
