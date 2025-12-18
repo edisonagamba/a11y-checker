@@ -181,19 +181,3 @@ function analyzeSelection() {
 }
 
 analyzeSelection();
-
-//////////////////////////
-// UI MESSAGES
-//////////////////////////
-
-figma.ui.onmessage = (msg) => {
-  if (msg.type === "copy-to-clipboard") {
-    (figma as any).clipboard.writeText(msg.value);
-    figma.notify(`Copied ${msg.value}`);
-  }
-
-  if (msg.type === "analyze") analyzeSelection();
-  if (msg.type === "cancel") figma.closePlugin();
-};
-
-figma.on("selectionchange", analyzeSelection);

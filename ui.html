@@ -210,9 +210,9 @@
       .suggested-color.copied::after {
         content: "Copied!";
         position: absolute;
-        top: -10px;
-        right: 8px;
-        font-size: 9px;
+        top: 10px;
+        right: 10px;
+        font-size: 10px;
         color: #28a745;
         font-weight: 700;
       }
@@ -312,7 +312,9 @@
 
       <div class="contrast-display">
         <div>
-          <div class="color-swatch" style="background:${c.foregroundColor}"></div>
+          <div class="color-swatch" style="background:${
+            c.foregroundColor
+          }"></div>
           <div class="color-label">Foreground</div>
         </div>
 
@@ -322,7 +324,9 @@
         </div>
 
         <div>
-          <div class="color-swatch" style="background:${c.backgroundColor}"></div>
+          <div class="color-swatch" style="background:${
+            c.backgroundColor
+          }"></div>
           <div class="color-label">Background</div>
         </div>
       </div>
@@ -363,21 +367,39 @@
         content.innerHTML = html;
         attachClipboard();
       }
+      function attachClipboard() {
+        const suggestionDivs = document.querySelectorAll(".suggested-color");
 
-el.onclick = () => {
-  parent.postMessage(
-    {
-      pluginMessage: {
-        type: "copy-to-clipboard",
-        value: color
+        suggestionDivs.forEach((div) => {
+          div.onclick = () => {
+            const color = div.getAttribute("data-color");
+            console.log("Copying color:", color);
+
+            const textArea = document.createElement("textarea");
+            textArea.value = color;
+
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+
+            textArea.focus();
+            textArea.select();
+
+            try {
+              const successful = document.execCommand("copy");
+              if (successful) {
+                div.classList.add("copied");
+                setTimeout(() => div.classList.remove("copied"), 2000);
+              }
+            } catch (err) {
+              console.error("No se pudo copiar", err);
+            }
+
+            document.body.removeChild(textArea);
+          };
+        });
       }
-    },
-    "*"
-  );
-
-  el.classList.add("copied");
-  setTimeout(() => el.classList.remove("copied"), 1000);
-};
     </script>
   </body>
 </html>
