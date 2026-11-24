@@ -1,7 +1,7 @@
 {
-  "name": "a11y-checker",
+  "name": "a11y-color-checker",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Check color contrast accessibility in Figma designs",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -12,8 +12,6 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@figma/eslint-plugin-figma-plugins": "*",
-    "@figma/plugin-typings": "*",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
     "eslint": "^8.54.0",
